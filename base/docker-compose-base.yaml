@@ -1,0 +1,81 @@
+version: '2'
+
+services:
+  orderer.digitalcatapult.org:
+    container_name: orderer.digitalcatapult.org
+    image: hyperledger/fabric-orderer:latest
+    environment:
+      - ORDERER_GENERAL_LOGLEVEL=INFO
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      # enabled TLS
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    command: orderer
+    volumes:
+    - ../channel-artifacts/:/var/hyperledger/orderer/
+    - ../crypto-config/ordererOrganizations/digitalcatapult.org/orderers/orderer.digitalcatapult.org/msp:/var/hyperledger/orderer/msp
+    - ../crypto-config/ordererOrganizations/digitalcatapult.org/orderers/orderer.digitalcatapult.org/tls/:/var/hyperledger/orderer/tls
+    - orderer.digitalcatapult.org:/var/hyperledger/production/orderer
+    ports:
+      - 7050:7050
+
+  peer0.coffeeaudit.io:
+    container_name: peer0.coffeeaudit.io
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.coffeeaudit.io
+      - CORE_PEER_ADDRESS=peer0.coffeeaudit.io:7051
+      - CORE_PEER_LOCALMSPID=coffeeauditMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/coffeeaudit.io/peers/peer0.coffeeaudit.io/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/coffeeaudit.io/peers/peer0.coffeeaudit.io/tls:/etc/hyperledger/fabric/tls
+        - peer0.coffeeaudit.io:/var/hyperledger/production
+    ports:
+      - 8051:7051
+      - 8053:7053
+
+  peer0.bobscoffee.co:
+    container_name: peer0.bobscoffee.co
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bobscoffee.co
+      - CORE_PEER_ADDRESS=peer0.bobscoffee.co:7051
+      - CORE_PEER_LOCALMSPID=bobscoffeeMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bobscoffee.co/peers/peer0.bobscoffee.co/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bobscoffee.co/peers/peer0.bobscoffee.co/tls:/etc/hyperledger/fabric/tls
+        - peer0.bobscoffee.co:/var/hyperledger/production
+    ports:
+      - 10051:7051
+      - 10053:7053
+
+  peer0.charliescoffee.co:
+    container_name: peer0.charliescoffee.co
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.charliescoffee.co
+      - CORE_PEER_ADDRESS=peer0.charliescoffee.co:7051
+      - CORE_PEER_LOCALMSPID=charliescoffeeMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/charliescoffee.co/peers/peer0.charliescoffee.co/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/charliescoffee.co/peers/peer0.charliescoffee.co/tls:/etc/hyperledger/fabric/tls
+        - peer0.charliescoffee.co:/var/hyperledger/production
+    ports:
+      - 12051:7051
+      - 12053:7053

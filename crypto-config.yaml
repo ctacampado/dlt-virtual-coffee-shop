@@ -1,0 +1,28 @@
+OrdererOrgs:
+  - Name: Orderer
+    Domain: digitalcatapult.org
+    EnableNodeOUs: true
+    Specs:
+      - Hostname: orderer
+PeerOrgs:
+  - Name: coffeeaudit
+    Domain: coffeeaudit.io
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: bobscoffee
+    Domain: bobscoffee.co
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: charliescoffee
+    Domain: charliescoffee.co
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1

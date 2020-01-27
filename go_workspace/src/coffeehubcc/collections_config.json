@@ -1,0 +1,15 @@
+[{
+        "name": "BobsCoffeeCollection",
+        "policy": "OR('coffeeauditMSP.member','bobscoffeeMSP.member')",
+        "requiredPeerCount": 0,
+        "maxPeerCount": 3,
+        "blockToLive": 1000000
+    },
+    {
+        "name": "CharliesCoffeeCollection",
+        "policy": "OR('coffeeauditMSP.member','charliescoffeeMSP.member')",
+        "requiredPeerCount": 0,
+        "maxPeerCount": 3,
+        "blockToLive": 1000000
+    }
+]

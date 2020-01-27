@@ -1,0 +1,245 @@
+crypto-config
+├── ordererOrganizations
+│   └── digitalcatapult.org
+│       ├── ca
+│       │   ├── 2581d3bbb59b6b3543e84e95afc2ffd85d12f8266e23f76f0850993898f12125_sk
+│       │   └── ca.digitalcatapult.org-cert.pem
+│       ├── msp
+│       │   ├── admincerts
+│       │   ├── cacerts
+│       │   │   └── ca.digitalcatapult.org-cert.pem
+│       │   ├── config.yaml
+│       │   └── tlscacerts
+│       │       └── tlsca.digitalcatapult.org-cert.pem
+│       ├── orderers
+│       │   └── orderer.digitalcatapult.org
+│       │       ├── msp
+│       │       │   ├── admincerts
+│       │       │   ├── cacerts
+│       │       │   │   └── ca.digitalcatapult.org-cert.pem
+│       │       │   ├── config.yaml
+│       │       │   ├── keystore
+│       │       │   │   └── 01f9e18e988a0664c09c080ec697fd5cb3420b201540321d323318e6147a367e_sk
+│       │       │   ├── signcerts
+│       │       │   │   └── orderer.digitalcatapult.org-cert.pem
+│       │       │   └── tlscacerts
+│       │       │       └── tlsca.digitalcatapult.org-cert.pem
+│       │       └── tls
+│       │           ├── ca.crt
+│       │           ├── server.crt
+│       │           └── server.key
+│       ├── tlsca
+│       │   ├── 0a189606839001f2efb811fbf4ca9abd779c6adc603458389f6d38bb4fc7da99_sk
+│       │   └── tlsca.digitalcatapult.org-cert.pem
+│       └── users
+│           └── Admin@digitalcatapult.org
+│               ├── msp
+│               │   ├── admincerts
+│               │   ├── cacerts
+│               │   │   └── ca.digitalcatapult.org-cert.pem
+│               │   ├── config.yaml
+│               │   ├── keystore
+│               │   │   └── 894b235c7a65cca86ba1e858524e04eac26f8815420b98b96a917103352f1797_sk
+│               │   ├── signcerts
+│               │   │   └── Admin@digitalcatapult.org-cert.pem
+│               │   └── tlscacerts
+│               │       └── tlsca.digitalcatapult.org-cert.pem
+│               └── tls
+│                   ├── ca.crt
+│                   ├── client.crt
+│                   └── client.key
+└── peerOrganizations
+    ├── bobscoffee.co
+    │   ├── ca
+    │   │   ├── 375d4eb285cf6ceca54cc83e8fb4a2baf3f30ee2e19d8435b693599092797526_sk
+    │   │   └── ca.bobscoffee.co-cert.pem
+    │   ├── msp
+    │   │   ├── admincerts
+    │   │   ├── cacerts
+    │   │   │   └── ca.bobscoffee.co-cert.pem
+    │   │   ├── config.yaml
+    │   │   └── tlscacerts
+    │   │       └── tlsca.bobscoffee.co-cert.pem
+    │   ├── peers
+    │   │   └── peer0.bobscoffee.co
+    │   │       ├── msp
+    │   │       │   ├── admincerts
+    │   │       │   ├── cacerts
+    │   │       │   │   └── ca.bobscoffee.co-cert.pem
+    │   │       │   ├── config.yaml
+    │   │       │   ├── keystore
+    │   │       │   │   └── cfbd32465f5f895782b7543c73e518f341c4b406a80088e46d67fd677224a4e8_sk
+    │   │       │   ├── signcerts
+    │   │       │   │   └── peer0.bobscoffee.co-cert.pem
+    │   │       │   └── tlscacerts
+    │   │       │       └── tlsca.bobscoffee.co-cert.pem
+    │   │       └── tls
+    │   │           ├── ca.crt
+    │   │           ├── server.crt
+    │   │           └── server.key
+    │   ├── tlsca
+    │   │   ├── 22255782450f34c73242ba56c699b252333a1bb4706134dd08c38960197d3af3_sk
+    │   │   └── tlsca.bobscoffee.co-cert.pem
+    │   └── users
+    │       ├── Admin@bobscoffee.co
+    │       │   ├── msp
+    │       │   │   ├── admincerts
+    │       │   │   ├── cacerts
+    │       │   │   │   └── ca.bobscoffee.co-cert.pem
+    │       │   │   ├── config.yaml
+    │       │   │   ├── keystore
+    │       │   │   │   └── 7f5e644cb8d5347b0c4e1d971aae81ffbf547efa1784b43151f4742098f828e0_sk
+    │       │   │   ├── signcerts
+    │       │   │   │   └── Admin@bobscoffee.co-cert.pem
+    │       │   │   └── tlscacerts
+    │       │   │       └── tlsca.bobscoffee.co-cert.pem
+    │       │   └── tls
+    │       │       ├── ca.crt
+    │       │       ├── client.crt
+    │       │       └── client.key
+    │       └── User1@bobscoffee.co
+    │           ├── msp
+    │           │   ├── admincerts
+    │           │   ├── cacerts
+    │           │   │   └── ca.bobscoffee.co-cert.pem
+    │           │   ├── config.yaml
+    │           │   ├── keystore
+    │           │   │   └── c5e099a2c743c4ae85cb3056b28a64df01e350fcb0cfa004c6f118d8b0d432f1_sk
+    │           │   ├── signcerts
+    │           │   │   └── User1@bobscoffee.co-cert.pem
+    │           │   └── tlscacerts
+    │           │       └── tlsca.bobscoffee.co-cert.pem
+    │           └── tls
+    │               ├── ca.crt
+    │               ├── client.crt
+    │               └── client.key
+    ├── charliescoffee.co
+    │   ├── ca
+    │   │   ├── ca.charliescoffee.co-cert.pem
+    │   │   └── fb21867a23c7fbef3600a76b0b7b2f93d38d64bd432837c897466620d6c75518_sk
+    │   ├── msp
+    │   │   ├── admincerts
+    │   │   ├── cacerts
+    │   │   │   └── ca.charliescoffee.co-cert.pem
+    │   │   ├── config.yaml
+    │   │   └── tlscacerts
+    │   │       └── tlsca.charliescoffee.co-cert.pem
+    │   ├── peers
+    │   │   └── peer0.charliescoffee.co
+    │   │       ├── msp
+    │   │       │   ├── admincerts
+    │   │       │   ├── cacerts
+    │   │       │   │   └── ca.charliescoffee.co-cert.pem
+    │   │       │   ├── config.yaml
+    │   │       │   ├── keystore
+    │   │       │   │   └── 38f164dd31d1a783cbe970b450c2cb98221e8edd3e7a4bc17c4e63aed1194fdc_sk
+    │   │       │   ├── signcerts
+    │   │       │   │   └── peer0.charliescoffee.co-cert.pem
+    │   │       │   └── tlscacerts
+    │   │       │       └── tlsca.charliescoffee.co-cert.pem
+    │   │       └── tls
+    │   │           ├── ca.crt
+    │   │           ├── server.crt
+    │   │           └── server.key
+    │   ├── tlsca
+    │   │   ├── aa52f42ad4210faa651b89065ebc8ddb32fdcffa286ecf27f388599c6d21a46b_sk
+    │   │   └── tlsca.charliescoffee.co-cert.pem
+    │   └── users
+    │       ├── Admin@charliescoffee.co
+    │       │   ├── msp
+    │       │   │   ├── admincerts
+    │       │   │   ├── cacerts
+    │       │   │   │   └── ca.charliescoffee.co-cert.pem
+    │       │   │   ├── config.yaml
+    │       │   │   ├── keystore
+    │       │   │   │   └── ac30bbcd38f6f44c980741fe1137feaf71e1f129ccd4182002ae296eda54d200_sk
+    │       │   │   ├── signcerts
+    │       │   │   │   └── Admin@charliescoffee.co-cert.pem
+    │       │   │   └── tlscacerts
+    │       │   │       └── tlsca.charliescoffee.co-cert.pem
+    │       │   └── tls
+    │       │       ├── ca.crt
+    │       │       ├── client.crt
+    │       │       └── client.key
+    │       └── User1@charliescoffee.co
+    │           ├── msp
+    │           │   ├── admincerts
+    │           │   ├── cacerts
+    │           │   │   └── ca.charliescoffee.co-cert.pem
+    │           │   ├── config.yaml
+    │           │   ├── keystore
+    │           │   │   └── 33d321c8f1726e0aa12db31f6e814cc3d47cf6ff264cec89b8888fdc9838f0f9_sk
+    │           │   ├── signcerts
+    │           │   │   └── User1@charliescoffee.co-cert.pem
+    │           │   └── tlscacerts
+    │           │       └── tlsca.charliescoffee.co-cert.pem
+    │           └── tls
+    │               ├── ca.crt
+    │               ├── client.crt
+    │               └── client.key
+    └── coffeeaudit.io
+        ├── ca
+        │   ├── 59fa1f0789ea78b7f5389fbbc428ecdcc4bb4500755cb56b6026676cf610b05c_sk
+        │   └── ca.coffeeaudit.io-cert.pem
+        ├── msp
+        │   ├── admincerts
+        │   ├── cacerts
+        │   │   └── ca.coffeeaudit.io-cert.pem
+        │   ├── config.yaml
+        │   └── tlscacerts
+        │       └── tlsca.coffeeaudit.io-cert.pem
+        ├── peers
+        │   └── peer0.coffeeaudit.io
+        │       ├── msp
+        │       │   ├── admincerts
+        │       │   ├── cacerts
+        │       │   │   └── ca.coffeeaudit.io-cert.pem
+        │       │   ├── config.yaml
+        │       │   ├── keystore
+        │       │   │   └── 01122f45a554a564c4932d513e70f0ad740a6499942faa142e34694faf17337d_sk
+        │       │   ├── signcerts
+        │       │   │   └── peer0.coffeeaudit.io-cert.pem
+        │       │   └── tlscacerts
+        │       │       └── tlsca.coffeeaudit.io-cert.pem
+        │       └── tls
+        │           ├── ca.crt
+        │           ├── server.crt
+        │           └── server.key
+        ├── tlsca
+        │   ├── 7d5dbe218b4fe7afeecfdece5f4191ed8e01fcb36157fe9f032ed2346ee35095_sk
+        │   └── tlsca.coffeeaudit.io-cert.pem
+        └── users
+            ├── Admin@coffeeaudit.io
+            │   ├── msp
+            │   │   ├── admincerts
+            │   │   ├── cacerts
+            │   │   │   └── ca.coffeeaudit.io-cert.pem
+            │   │   ├── config.yaml
+            │   │   ├── keystore
+            │   │   │   └── 72bb46a433843c240e72e5b9291649d882e6e7a0d2132952f7bc0676c9fb9917_sk
+            │   │   ├── signcerts
+            │   │   │   └── Admin@coffeeaudit.io-cert.pem
+            │   │   └── tlscacerts
+            │   │       └── tlsca.coffeeaudit.io-cert.pem
+            │   └── tls
+            │       ├── ca.crt
+            │       ├── client.crt
+            │       └── client.key
+            └── User1@coffeeaudit.io
+                ├── msp
+                │   ├── admincerts
+                │   ├── cacerts
+                │   │   └── ca.coffeeaudit.io-cert.pem
+                │   ├── config.yaml
+                │   ├── keystore
+                │   │   └── b3c80891b7fe1aed4717830352c2f2a0bb3a446f5d8382bddb90a97e7424590c_sk
+                │   ├── signcerts
+                │   │   └── User1@coffeeaudit.io-cert.pem
+                │   └── tlscacerts
+                │       └── tlsca.coffeeaudit.io-cert.pem
+                └── tls
+                    ├── ca.crt
+                    ├── client.crt
+                    └── client.key
+
+126 directories, 116 files

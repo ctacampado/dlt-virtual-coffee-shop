@@ -1,0 +1,203 @@
+version: '2'
+
+volumes:
+  orderer.digitalcatapult.org:
+  ca.coffeeaudit.io:
+  ca.bobscoffee.co:
+  ca.charliescoffee.co:
+  peer0.coffeeaudit.io:
+  peer0.bobscoffee.co:
+  peer0.charliescoffee.co:
+
+networks:
+  digitalcatapult:
+services:
+  orderer.digitalcatapult.org:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer.digitalcatapult.org
+    container_name: orderer.digitalcatapult.org
+    networks:
+      - digitalcatapult
+
+  ca.coffeeaudit.io:
+    image: hyperledger/fabric-ca:latest
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-coffeeaudit
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.coffeeaudit.io-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/59fa1f0789ea78b7f5389fbbc428ecdcc4bb4500755cb56b6026676cf610b05c_sk
+    ports:
+      - "8054:7054"
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.coffeeaudit.io-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/59fa1f0789ea78b7f5389fbbc428ecdcc4bb4500755cb56b6026676cf610b05c_sk -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/coffeeaudit.io/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.coffeeaudit.io
+    networks:
+      - digitalcatapult
+
+  ca.bobscoffee.co:
+    image: hyperledger/fabric-ca:latest
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-bobscoffee
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.bobscoffee.co-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/375d4eb285cf6ceca54cc83e8fb4a2baf3f30ee2e19d8435b693599092797526_sk
+    ports:
+      - "9054:7054"
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.bobscoffee.co-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/375d4eb285cf6ceca54cc83e8fb4a2baf3f30ee2e19d8435b693599092797526_sk -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/bobscoffee.co/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.bobscoffee.co
+    networks:
+      - digitalcatapult
+
+  ca.charliescoffee.co:
+    image: hyperledger/fabric-ca:latest
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-charliescoffee
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.charliescoffee.co-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/fb21867a23c7fbef3600a76b0b7b2f93d38d64bd432837c897466620d6c75518_sk
+    ports:
+      - "10054:7054"
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.charliescoffee.co-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/fb21867a23c7fbef3600a76b0b7b2f93d38d64bd432837c897466620d6c75518_sk -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/charliescoffee.co/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.charliescoffee.co
+    networks:
+      - digitalcatapult
+
+  peer0.bobscoffee.co:
+    container_name: peer0.bobscoffee.co
+    environment:
+      - GODEBUG=netdns=go
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-db1-bobscoffee.co:5984
+      # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
+      # provide the credentials for ledger to connect to CouchDB.  The username and password must
+      # match the username and password set for the associated CouchDB.
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=cdb
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=cdbpw
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bobscoffee.co:7051
+    depends_on:
+      - couchdb-db1-bobscoffee.co
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bobscoffee.co
+    networks:
+      - digitalcatapult
+
+  peer0.charliescoffee.co:
+    container_name: peer0.charliescoffee.co
+    environment:
+      - GODEBUG=netdns=go
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-db1-charliescoffee.co:5984
+      # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
+      # provide the credentials for ledger to connect to CouchDB.  The username and password must
+      # match the username and password set for the associated CouchDB.
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=cdb
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=cdbpw
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.charliescoffee.co:7051
+    depends_on:
+      - couchdb-db1-charliescoffee.co
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.charliescoffee.co
+    networks:
+      - digitalcatapult
+
+  peer0.coffeeaudit.io:
+    container_name: peer0.coffeeaudit.io
+    environment:
+      - GODEBUG=netdns=go
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-db1-coffeeaudit.io:5984
+      # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
+      # provide the credentials for ledger to connect to CouchDB.  The username and password must
+      # match the username and password set for the associated CouchDB.
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=cdb
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=cdbpw
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.coffeeaudit.io:7051
+    depends_on:
+      - couchdb-db1-coffeeaudit.io
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.coffeeaudit.io
+    networks:
+      - digitalcatapult
+
+  couchdb-db1-coffeeaudit.io:
+    container_name: couchdb-db1-coffeeaudit.io
+    image: hyperledger/fabric-couchdb
+    # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
+    # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
+    environment:
+      - COUCHDB_USER=cdb
+      - COUCHDB_PASSWORD=cdbpw
+    ports:
+      - 7984:5984
+    networks:
+      - digitalcatapult
+
+  couchdb-db1-bobscoffee.co:
+    container_name: couchdb-db1-bobscoffee.co
+    image: hyperledger/fabric-couchdb
+    # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
+    # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
+    environment:
+      - COUCHDB_USER=cdb
+      - COUCHDB_PASSWORD=cdbpw
+    ports:
+      - 9984:5984
+    networks:
+      - digitalcatapult
+
+  couchdb-db1-charliescoffee.co:
+    container_name: couchdb-db1-charliescoffee.co
+    image: hyperledger/fabric-couchdb
+    # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
+    # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
+    environment:
+      - COUCHDB_USER=cdb
+      - COUCHDB_PASSWORD=cdbpw
+    ports:
+      - 11984:5984
+    networks:
+      - digitalcatapult
+
+  cli-coffeeaudit:
+    container_name: cli-coffeeaudit
+    image: hyperledger/fabric-tools:latest
+    tty: true
+    stdin_open: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      #- CORE_LOGGING_LEVEL=DEBUG
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_ID=cli-coffeeaudit
+      - CORE_PEER_ADDRESS=peer0.coffeeaudit.io:7051
+      - CORE_PEER_LOCALMSPID=coffeeauditMSP
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/coffeeaudit.io/peers/peer0.coffeeaudit.io/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/coffeeaudit.io/peers/peer0.coffeeaudit.io/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/coffeeaudit.io/peers/peer0.coffeeaudit.io/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/coffeeaudit.io/users/Admin@coffeeaudit.io/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+        - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts
+        - ./go_workspace/src/coffeehubcc:/opt/gopath/src/chaincode/coffeehubcc
+    depends_on:
+      - orderer.digitalcatapult.org
+      - peer0.coffeeaudit.io
+    networks:
+      - digitalcatapult
