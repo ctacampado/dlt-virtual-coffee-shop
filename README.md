@@ -1,5 +1,5 @@
 # Coffee Hub
-A network of coffee shops and third-party logistics companies
+A network of coffee shops and other entities
 
 ## Technologies
 - Hyperledger Fabric
