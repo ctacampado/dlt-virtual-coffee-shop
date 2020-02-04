@@ -8,7 +8,7 @@ A network of coffee shops and other entities
 
 ## Prerequisites
 - Hyperledger Fabric 1.4.4 (tool binaries and docker images)
-- Fabric's version is 1.12.12 but I am currently using 1.13 in my dev machine
+- Go's version is 1.12.12 but I am currently using 1.13 in my dev machine
 - github.com/hyperledger/fabric-chaincode-go/shim
 - github.com/hyperledger/fabric-protos-go/peer
 
